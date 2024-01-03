@@ -10,3 +10,8 @@ export enum AppUserRole {
     ROLE_CLIENT = 'ROLE_CLIENT',
   }
   
+
+  export class AuthenticationRequest {
+    username :string;
+    password :string;
+  }

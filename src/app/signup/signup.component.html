@@ -8,7 +8,7 @@
                 <div class="row">
                 <mat-form-field appearance="outline">
                      <mat-label>Username</mat-label>
-                     <input matInput formControlName="username" placeholder="Username" required/>
+                     <input matInput formControlName="username" placeholder="Email Address" required/>
                      <mat-error *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
                       Please enter a valid name
                     </mat-error>

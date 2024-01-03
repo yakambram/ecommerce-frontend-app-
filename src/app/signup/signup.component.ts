@@ -47,14 +47,13 @@ export class SignupComponent implements OnInit {
     .pipe(
       tap(
         () => {
-          this.snackBar.open('Sign up successful', 'Close', { duration: 5000 });
+          this.snackBar.open('Sign up successful', 'ok', { duration: 5000 });
           this.router.navigateByUrl('/login');
         },
         (error) => {
-         /* this.snackBar.open('Sign up failed', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
-          console.error('Sign up failed:', error);*/
-          this.snackBar.open('Sign up successful', 'Close', { duration: 5000 });
-          this.router.navigateByUrl('/login');
+           this.snackBar.open('Sign up failed', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+          console.error('Sign up failed:', error);
+         
         }
       )
     )

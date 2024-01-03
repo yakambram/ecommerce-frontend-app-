@@ -37,19 +37,25 @@ export class LoginComponent {
     const password = this.loginForm.get('password')!.value;
     this.authService.login(username, password).subscribe(
         (response) => {
-          this.snackBar.open('Sign up successful', 'Close', { duration: 5000 });
-          this.router.navigateByUrl('/login');
+          this.snackBar.open('Login Success ', 'Ok', { duration: 1000 });
+
+          const authHeader = response.headers.get('Authorization') || response.headers.get('authorization');
+  
+          if (authHeader) {
+            const token = authHeader.substring(7); // Assuming it's a Bearer token
+            const user = response.body;
+    
+            if (token && user) {
+              this.userStorageService.saveToken(token);
+              this.userStorageService.saveUser(user);
+              return true;
+            }
+          }
+           this.router.navigateByUrl('/order');
+          return false;
         },
         (error) => {
-          const token = error.error.text
-          const user = username;
-          console.log(token);
-          if(token && user) {
-            this.userStorageService.saveToken(token);
-            this.userStorageService.saveUser(user);
-            this.router.navigateByUrl('/order');
-          }
-           return false;
+          this.snackBar.open('Failed to login, retry ', 'Close', { duration: 5000 });
         }
       );
   }
