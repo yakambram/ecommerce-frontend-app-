@@ -37,22 +37,18 @@ export class LoginComponent {
     const password = this.loginForm.get('password')!.value;
     this.authService.login(username, password).subscribe(
         (response) => {
-          this.snackBar.open('Login Success ', 'Ok', { duration: 1000 });
-
-          const authHeader = response.headers.get('Authorization') || response.headers.get('authorization');
-  
-          if (authHeader) {
-            const token = authHeader.substring(7); // Assuming it's a Bearer token
             const user = response.body;
-    
-            if (token && user) {
-              this.userStorageService.saveToken(token);
+            if (user) {
+              this.userStorageService.saveToken(user.token);
               this.userStorageService.saveUser(user);
-              return true;
+              if(UserStorageService.isAdminLoggedIn()){
+                this.router.navigateByUrl('admin/dashboard');
+              }else if(UserStorageService.isCustomerLoggedIn()){
+                this.router.navigateByUrl('customer/dashboard');
+              }
             }
-          }
-           this.router.navigateByUrl('/order');
-          return false;
+         
+         return false;
         },
         (error) => {
           this.snackBar.open('Failed to login, retry ', 'Close', { duration: 5000 });

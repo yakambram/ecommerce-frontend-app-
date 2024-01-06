@@ -7,7 +7,7 @@ import { OrderComponent } from './order/order.component';
 const routes: Routes = [
 {path:"login" , component:LoginComponent},
 {path:"signup" , component:SignupComponent},
-{path:"order" , component:OrderComponent},
+{path:"track-order" , component:OrderComponent},
 { path: 'customer', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) }, 
 { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
 
