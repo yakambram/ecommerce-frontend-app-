@@ -11,6 +11,7 @@ import { OrderComponent } from './order/order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TrackOrderComponent } from './track-order/track-order.component';
+import { DiscountCouponComponent } from './discount-coupon/discount-coupon.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TrackOrderComponent } from './track-order/track-order.component';
     LoginComponent,
     SignupComponent,
     OrderComponent,
-    TrackOrderComponent
+    TrackOrderComponent,
+    DiscountCouponComponent
   ],
   imports: [
     BrowserModule,
