@@ -46,6 +46,8 @@ export class LoginComponent {
                 this.router.navigateByUrl('admin/dashboard');
               }else if(UserStorageService.isCustomerLoggedIn()){
                 this.router.navigateByUrl('customer/dashboard');
+              }else{
+                this.router.navigateByUrl('dashboard');
               }
             }
          

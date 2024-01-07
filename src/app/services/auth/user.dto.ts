@@ -1,5 +1,6 @@
 export default class UserDTO {
     username : string;
+    name : string;
     email : string;
     password : string;
     appUserRoles : string[];
@@ -7,9 +8,9 @@ export default class UserDTO {
 
 export enum AppUserRole {
     ROLE_ADMIN = 'ROLE_ADMIN',
-    ROLE_CLIENT = 'ROLE_CLIENT',
     ROLE_CUSTOMER = "ROLE_CUSTOMER",
-    ROLE_AGENT="ROLE_AGENT"
+    ROLE_AGENT="ROLE_AGENT",
+    ROLE_CLIENT = 'ROLE_CLIENT'
   }
   
 

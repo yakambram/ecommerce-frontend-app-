@@ -17,8 +17,9 @@ export class AuthService {
   register(signupForm: any): Observable<any> {
     let appUserRoles: AppUserRole[] = [signupForm.appUserRoles];
     let userDataDTO: UserDTO = {
+      name: signupForm.name,
       username: signupForm.username,
-      email: signupForm.email,
+      email: signupForm.username,
       password: signupForm.password,
       appUserRoles: appUserRoles
     };

@@ -1,5 +1,5 @@
 <app-discount-coupon></app-discount-coupon>
-<div *ngIf="!isCustomerLoggedIn && !isAdminLoggedIn">
+<div *ngIf="!isCustomerLoggedIn && !isAdminLoggedIn && !isAgentLoggedIn  && !isClientLoggedIn">
 <mat-toolbar style="background-color:  #9A616D; color: #fff;" class="navbar"> 
 <div class="container">
 <span class="navvar-brand">E-Commerce</span>
@@ -11,6 +11,31 @@
 </div>
 </mat-toolbar>
 </div>
+
+<div *ngIf="isAgentLoggedIn">
+    <mat-toolbar style="background-color:  #9A616D; color: #fff;" class="navbar"> 
+    <div class="container">
+    <span class="navvar-brand">E-Commerce</span>
+    <div class="mr-auto">
+    <button mat-button routerLink="/track-order" routerLinkActive="active">Track Order</button>
+    <button mat-button routerLink="/signup" routerLinkActive="active">Register</button>
+    <button mat-button routerLinkActive="active" (click)="logOut()">Logout</button>
+    </div>
+    </div>
+    </mat-toolbar>
+    </div> 
+    <div *ngIf="isClientLoggedIn">
+        <mat-toolbar style="background-color:  #9A616D; color: #fff;" class="navbar"> 
+        <div class="container">
+        <span class="navvar-brand">E-Commerce</span>
+        <div class="mr-auto">
+        <button mat-button routerLink="/track-order" routerLinkActive="active">Track Order</button>
+        <button mat-button routerLink="/signup" routerLinkActive="active">Register</button>
+        <button mat-button routerLinkActive="active" (click)="logOut()">Logout</button>
+        </div>
+        </div>
+        </mat-toolbar>
+        </div> 
 <div *ngIf="isAdminLoggedIn">
     <mat-toolbar style="background-color:  #9A616D; color: #fff;" class="navbar"> 
     <div class="container">
