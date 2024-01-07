@@ -65,7 +65,19 @@
     <button mat-button routerLink="/customer/my_orders" routerLinkActive="active">Orders</button>
     <button mat-button routerLink="/customer/wishlist" routerLinkActive="active">Wishlist</button>
     <button mat-button routerLink="/customer/profile" routerLinkActive="active">Profile</button>
-    <button mat-button routerLinkActive="active" (click)="logOut()">Logout</button>
+    <button mat-button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile" (click)="logOut()">
+        <i class="bi bi-person fs-4"></i>
+      </button>
+      
+   
+    <button mat-button routerLink="/customer/cart" routerLinkActive="active" class="custom-cart-button">
+        <span class="cart-icon">
+          <i class="bi bi-cart"></i>
+          <span class="badge badge-pill badge-warning">{{ cartService.getCartItemCount() }}</span>
+        </span>
+      </button>
+      
+      
     </div>
     </div>
     </mat-toolbar>

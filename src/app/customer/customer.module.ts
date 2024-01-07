@@ -8,6 +8,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { FormsModule } from '@angular/forms';
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 @NgModule({
@@ -17,11 +19,13 @@ import { ProfileComponent } from './components/profile/profile.component';
     CartComponent,
     OrdersComponent,
     WishlistComponent,
-    ProfileComponent
+    ProfileComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
+    FormsModule
   ]
 })
 export class CustomerModule { }

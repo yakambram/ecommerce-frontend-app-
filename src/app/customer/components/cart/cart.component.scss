@@ -1,0 +1,61 @@
+/* cart.component.css */
+
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cart-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-input {
+    display: flex;
+    align-items: center;
+}
+
+.remove-button {
+    background-color: #ff6666;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.total-amount {
+    margin-top: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.clear-button {
+    background-color: #e10707;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.payment-button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.clear-button:hover {
+    background-color: #45a049;
+}

@@ -1,1 +1,15 @@
-<p>Customer dashboard works!</p>
+<div class="product-grid">
+    <div *ngFor="let product of products$ | async" class="product-card">
+      <img src="https://placekitten.com/200/200" alt="IMG">
+      <h3>{{ product.productName }}</h3>
+      <h2>Price: {{ product.productPrice | currency: 'INR' }}</h2>
+      <p>{{ product.productDescription }}</p>
+      <div class="quantity-input">
+        <button (click)="decrementQuantity(product)">-</button>
+        <input type="number" [(ngModel)]="quantity" readonly>
+        <button (click)="incrementQuantity(product)">+</button>
+      </div>
+      <button (click)="addToCart(product)">Add to Cart</button>
+    </div>
+  </div>
+  

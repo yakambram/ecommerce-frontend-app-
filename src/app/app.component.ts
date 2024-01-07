@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserStorageService } from './services/storage/user-storage.service';
 import { Router } from '@angular/router';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
   isClientLoggedIn = UserStorageService.isClientLoggedIn();
 
 
-  constructor(private router: Router){}
+  constructor(private router: Router, 
+    public cartService: CartService){}
 
   ngOnInit():void {
     this.router.events.subscribe(event => {
