@@ -7,21 +7,28 @@
     }
   }
 
-  .company-name {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
   .discount-coupon {
-    padding: 10px;
-    margin: 20px 0;
     overflow: hidden;
     position: relative;
+    background-color:#9FE2BF;
+    height: auto;
+    width: 100%;
+    padding: 2px;
   }
 
   .coupon-text {
     white-space: nowrap;
+    padding: 5px;
     animation: moveText 40s linear infinite; 
+   
+  }
+  .company-name {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'cursive';
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding: 10px;
+    
   }

@@ -48,7 +48,7 @@ export class UserStorageService {
       return false;
     }
     const role: string = this.getUserRole();
-    return role == 'ROLE_ADMIN';
+    return role === 'ROLE_ADMIN';
   }
 
   static isCustomerLoggedIn(): boolean {
@@ -56,7 +56,7 @@ export class UserStorageService {
       return false;
     }
     const role: string = this.getUserRole();
-    return role == 'ROLE_CUSTOMER';
+    return role === 'ROLE_CUSTOMER';
   }
 
   static isAgentLoggedIn(): boolean {
@@ -64,7 +64,7 @@ export class UserStorageService {
       return false;
     }
     const role: string = this.getUserRole();
-    return role == 'ROLE_AGENT';
+    return role === 'ROLE_AGENT';
   }
 
   static isClientLoggedIn(): boolean {
@@ -72,7 +72,7 @@ export class UserStorageService {
       return false;
     }
     const role: string = this.getUserRole();
-    return role == 'ROLE_CLIENT';
+    return role === 'ROLE_CLIENT';
   }
 
   static signOut():void {

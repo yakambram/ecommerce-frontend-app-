@@ -22,6 +22,7 @@ export class LoginComponent {
               }
 
   ngOnInit(): void {
+     UserStorageService.signOut();
     this.loginForm = this.formBuilder.group({
      username:[null, [Validators.required]],
      password:[null, [Validators.required]],

@@ -6,14 +6,15 @@ import { CartComponent } from './components/cart/cart.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { customerAuthGuard } from '../services/auth/customer-auth.guard';
 
 const routes: Routes = [
-  { path: '', component: CustomerComponent },
-  {path:'dashboard', component:DashboardComponent},
-  {path:'cart',component:CartComponent},
-  {path:'my_orders',component:OrdersComponent},
-  {path:'wishlist',component:WishlistComponent},
-  {path:'profile',component:ProfileComponent}
+  { path: '', component: CustomerComponent, canActivate:[customerAuthGuard] },
+  {path:'dashboard', component:DashboardComponent, canActivate:[customerAuthGuard]},
+  {path:'cart',component:CartComponent, canActivate:[customerAuthGuard]},
+  {path:'my_orders',component:OrdersComponent, canActivate:[customerAuthGuard]},
+  {path:'wishlist',component:WishlistComponent, canActivate:[customerAuthGuard]},
+  {path:'profile',component:ProfileComponent, canActivate:[customerAuthGuard]}
 ];
 
 @NgModule({

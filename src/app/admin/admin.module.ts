@@ -28,6 +28,6 @@ import { SubCategoryComponent } from './components/sub-category/sub-category.com
   imports: [
     CommonModule,
     AdminRoutingModule
-  ]
+  ],
 })
 export class AdminModule { }

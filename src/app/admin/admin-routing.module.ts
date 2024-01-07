@@ -9,17 +9,18 @@ import { SubCategoryComponent } from './components/sub-category/sub-category.com
 import { ProductComponent } from './components/product/product.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { CouponsComponent } from './components/coupons/coupons.component';
+import { adminAuthGuard } from '../services/auth/admin-auth.guard';
 
 const routes: Routes = [
-  { path: '', component: AdminComponent },
-  { path:'dashboard', component:DashboardComponent},
-  {path:'analytics',component:AnalyticsComponent},
-  {path:'brand',component:BrandComponent},
-  {path:'category',component:CategoryComponent},
-  {path:'sub-category',component:SubCategoryComponent},
-  {path:'product',component:ProductComponent},
-  {path:'orders',component:OrdersComponent},
-  {path:'coupons',component:CouponsComponent}
+  { path: '', component: AdminComponent , canActivate:[adminAuthGuard]},
+  { path:'dashboard', component:DashboardComponent,  canActivate:[adminAuthGuard]},
+  { path:'analytics',component:AnalyticsComponent,  canActivate:[adminAuthGuard]},
+  { path:'brand',component:BrandComponent,  canActivate:[adminAuthGuard]},
+  { path:'category',component:CategoryComponent,  canActivate:[adminAuthGuard]},
+  { path:'sub-category',component:SubCategoryComponent,  canActivate:[adminAuthGuard]},
+  { path:'product',component:ProductComponent,  canActivate:[adminAuthGuard]},
+  { path:'orders',component:OrdersComponent,  canActivate:[adminAuthGuard]},
+  { path:'coupons',component:CouponsComponent,  canActivate:[adminAuthGuard]}
 ];
 
 @NgModule({
