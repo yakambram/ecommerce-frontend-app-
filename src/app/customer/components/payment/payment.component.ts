@@ -7,12 +7,12 @@ import { RazorpayService } from 'src/app/services/razorpay.service';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss'] // Verify this path
+  styleUrls: ['./payment.component.scss'] 
 })
 export class PaymentComponent implements OnInit {
 
-  totalAmount: number = 1000; // Replace with your actual total amount
-  razorpayOptions: any = {}; // Customize Razorpay options as needed
+  totalAmount: number = 500; 
+  razorpayOptions: any = {}; 
 
   constructor(private razorpayService: RazorpayService) { }
 
@@ -20,13 +20,8 @@ export class PaymentComponent implements OnInit {
    
   }
   initiatePayment(): void {
-    this.razorpayService.createOrder(this.totalAmount)
-    .then(order => {
-      this.razorpayService.openPaymentModal(order);
-    })
-    .catch(error => {
-      console.error('Error creating Razorpay order:', error);
-    });
+    this.razorpayService.createOrder(this.totalAmount);
+    
   }
 
  

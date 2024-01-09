@@ -1,75 +1,108 @@
-// razorpay.service.ts
+import { HostListener, Injectable } from '@angular/core';
+import { OrderService } from './order.service';
 
-import { Injectable } from '@angular/core';
+declare var Razorpay: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class RazorpayService {
+  form: any = 
+    {   name:'Yakambram',
+        meail:'Yakambram.kommu@gmail.com',
+        phoneNumber:'9676222172',
+        amount:10
+}; 
+	paymentId: string;
+	error: string;
+  
+	constructor(private orderService: OrderService) {
 
-  private razorpayScriptLoaded: boolean = false;
+	}
 
-  // Function to load Razorpay script dynamically
-  private loadRazorpayScript(): Promise<void> {
-    return new Promise<void>((resolve) => {
-      if (!this.razorpayScriptLoaded) {
-        const script = document.createElement('script');
-        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-        script.onload = () => {
-          this.razorpayScriptLoaded = true;
-          resolve();
-        };
-        document.head.appendChild(script);
-      } else {
-        resolve();
-      }
-    });
-  }
+	options = {
+	key: "rzp_test_4lw80NvYa0WUy3",
+	amount: "10", 
+	name: "Yakambram Kommi",
+	description: "Web Development",
+	image: "https://www.javachinna.com/wp-content/uploads/2020/02/android-chrome-512x512-1.png",
+	order_id:"",
+	handler: function (response){
+		var event = new CustomEvent("payment.success", 
+			{
+				detail: response,
+				bubbles: true,
+				cancelable: true
+			}
+		);	  
+		window.dispatchEvent(event);
+	}
+	,
+	prefill: {
+	 name: "Yakambram",
+	 email: "yakambram.kommu@gmail.com",
+	 contact: "9676222172"
+	},
+	notes: {
+	address: "Manikonda"
+	},
+	theme: {
+	 color: "#3399cc"
+	}
+	};
 
-  // Create Razorpay order
-  createOrder(amount: number): Promise<any> {
-    // Replace this with your server-side logic to create an order on the server
-    // You'll need to make an API call to your server to generate the order and get the order details
-    // For example, you can use Angular's HttpClient to make a request to your server
-    return new Promise<any>((resolve, reject) => {
-      // Simulate server response (replace with actual server API call)
-      const order: any = {
-        id: 'order_id_from_server'+Date.now(),
-        amount: amount * 100, // Convert amount to paise
-        currency: 'INR'
-        // Add more order details as needed
-      };
+	createOrder(totalAmount:any): void {
+    let order = {
+      name:'Yakambram',
+      meail:'Yakambram.kommu@gmail.com',
+      phoneNumber:'9676222172',
+      amount:totalAmount
 
-      resolve(order);
-    });
-  }
+    }
+      
+		this.paymentId = ''; 
+		this.error = ''; 
+		this.orderService.createOrder(order).subscribe(
+		data => {
+			this.options.key = data.secretKey;
+			this.options.order_id = data.razorpayOrderId;
+			this.options.amount = data.applicationFee; //paise
+			this.options.prefill.name = this.form.name;
+			this.options.prefill.email = this.form.email;
+			this.options.prefill.contact = this.form.phone;
+			var rzp1 = new Razorpay(this.options);
+			rzp1.open();
+				      
+			rzp1.on('payment.failed', function (response){    
+				// Todo - store this information in the server
+				console.log(response.error.code);    
+				console.log(response.error.description);    
+				console.log(response.error.source);    
+				console.log(response.error.step);    
+				console.log(response.error.reason);    
+				console.log(response.error.metadata.order_id);    
+				console.log(response.error.metadata.payment_id);
+				this.error = response.error.reason;
+			}
+			);
+		}
+		,
+		err => {
+			this.error = err.error.message;
+		}
+		);
+	}
 
-  // Open Razorpay payment modal
-  async openPaymentModal(order: any): Promise<void> {
-    await this.loadRazorpayScript();
-
-    const options = {
-      key: 'rzp_test_4lw80NvYa0WUy3', // Replace with your actual Razorpay API key
-      amount: order.amount,
-      order_id: order.id,
-      name: 'Saharsh Code Craft Labs',
-      description: 'Payment for Products',
-      image: 'assets/your-logo.png', // Replace with your logo image path
-      handler: (response: any) => {
-        console.log(response);
-        // Handle payment success or failure here
-      },
-      prefill: {
-        name: 'yakambram',
-        email: 'yakambram.kommu@gmail.com',
-        contact: '9676222172'
-      },
-      theme: {
-        color: '#3366FF'
-      }
-    };
-
-    const razorpay: any = new (window as any).Razorpay(options);
-    razorpay.open();
-  }
+	@HostListener('window:payment.success', ['$event']) 
+	onPaymentSuccess(event): void {
+		this.orderService.updateOrder(event.detail).subscribe(
+		data => {
+			this.paymentId = data.message;
+		}
+		,
+		err => {
+			this.error = err.error.message;
+		}
+		);
+	}
 }
